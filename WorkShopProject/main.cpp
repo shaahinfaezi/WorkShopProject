@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     w.show();
 
 
-    qDebug()<<"BRUH";
+  qDebug("bruh");
 
     return a.exec();
 }
