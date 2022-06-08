@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -13,3 +15,24 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_pushButton_clicked()
+{
+
+    //az safe main be safe tasks miravad
+
+    hide();
+    tasks=new Tasks(this);
+    tasks->show();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    //az safe main be safe calendar miravad
+
+    hide();
+    calendar=new Calendar(this);
+    calendar->show();
+
+
+}

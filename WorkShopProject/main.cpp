@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QDebug>
 #include <QApplication>
+#include "tasks.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,7 +10,8 @@ int main(int argc, char *argv[])
     w.show();
 
 
-  qDebug("bruh");
+
+
 
     return a.exec();
 }

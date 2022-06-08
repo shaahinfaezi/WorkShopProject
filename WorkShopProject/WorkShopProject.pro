@@ -16,14 +16,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addtask.cpp \
+    calendar.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    tasks.cpp
 
 HEADERS += \
-    mainwindow.h
+    addtask.h \
+    calendar.h \
+    mainwindow.h \
+    tasks.h
 
 FORMS += \
-    mainwindow.ui
+    addtask.ui \
+    calendar.ui \
+    mainwindow.ui \
+    tasks.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
