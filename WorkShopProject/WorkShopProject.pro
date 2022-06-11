@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     addtask.cpp \
     calendar.cpp \
+    item.cpp \
     main.cpp \
     mainwindow.cpp \
     tasks.cpp
@@ -25,6 +26,7 @@ SOURCES += \
 HEADERS += \
     addtask.h \
     calendar.h \
+    item.h \
     mainwindow.h \
     tasks.h
 

@@ -22,7 +22,7 @@ void MainWindow::on_pushButton_clicked()
     //az safe main be safe tasks miravad
 
     hide();
-    tasks=new Tasks(this);
+    tasks=Tasks::get_instance(this);
     tasks->show();
 }
 

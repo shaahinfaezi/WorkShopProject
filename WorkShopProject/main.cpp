@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QApplication>
 #include "tasks.h"
+#include "addtask.h"
+
 
 int main(int argc, char *argv[])
 {

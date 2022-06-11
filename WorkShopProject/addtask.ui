@@ -86,10 +86,10 @@ color:rgb(0, 0, 0);
        <bool>false</bool>
       </property>
       <property name="currentText">
-       <string>Low</string>
+       <string/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>-1</number>
       </property>
       <item>
        <property name="text">
@@ -232,7 +232,7 @@ color:rgb(0, 0, 0);
     <rect>
      <x>440</x>
      <y>30</y>
-     <width>121</width>
+     <width>161</width>
      <height>51</height>
     </rect>
    </property>
@@ -244,7 +244,7 @@ color:rgb(0, 0, 0);
     </font>
    </property>
    <property name="text">
-    <string>Date &amp; Time :</string>
+    <string>Due date &amp; time :</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
