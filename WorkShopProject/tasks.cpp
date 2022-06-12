@@ -2,6 +2,7 @@
 #include "ui_tasks.h"
 #include <QThread>
 #include <QDebug>
+#include <QDateTime>
 
 
 
@@ -21,6 +22,13 @@ Tasks::Tasks(QWidget *parent) :
     ui->setupUi(this);
 
 
+     ui->listWidget->setIconSize(*new QSize(35,35));
+
+     Timer=new QTimer(this);
+
+    connect(Timer,SIGNAL(timeout()),this,SLOT(Due()));
+
+    Timer->start(1000);
 
 }
 
@@ -94,3 +102,82 @@ if(ui->listWidget->count()>0 && ui->listWidget->currentItem()!=nullptr){
 }
 
 }
+
+void Tasks::on_pushButton_4_clicked()
+{
+    //done va undone mikonad task ro
+    if(ui->listWidget->count()>0 && ui->listWidget->currentItem()!=nullptr && !items.at(ui->listWidget->currentRow())->get_done()){
+
+
+
+    ui->listWidget->currentItem()->setIcon(QIcon(":/rec /Icons/1930264_check_complete_done_green_success_icon (1).png"));
+
+    items.at(ui->listWidget->currentRow())->set_done(true);
+
+     }
+    else if(ui->listWidget->count()>0 && ui->listWidget->currentItem()!=nullptr && items.at(ui->listWidget->currentRow())->get_done()){
+
+
+        ui->listWidget->currentItem()->setIcon(QIcon(":/rec /Icons/211717_circle_icon.png"));
+
+        items.at(ui->listWidget->currentRow())->set_done(false);
+
+    }
+}
+
+void Tasks::Due(){
+
+    int current_time=QDateTime::currentDateTime().toTime_t();
+
+    int seconds_inDay =24*60*60;
+
+
+    for(int i=0;i<items.size();i++)      {
+
+        QDate D=*new QDate(items.at(i)->get_year(),items.at(i)->get_month(),items.at(i)->get_day());
+
+        QTime T=*new QTime(items.at(i)->get_hour(),items.at(i)->get_minute(),items.at(i)->get_second());
+
+        QDateTime DT=*new QDateTime(D,T);
+
+        int due_time=DT.toTime_t();
+
+        if(!items.at(i)->get_done()){
+
+
+
+
+
+        if(current_time>due_time){
+
+
+
+            ui->listWidget->item(i)->setBackgroundColor(Qt::red);
+
+        }
+        else if(due_time - current_time<seconds_inDay){
+
+            ui->listWidget->item(i)->setBackgroundColor(Qt::yellow);
+
+
+        }
+        else{
+            ui->listWidget->item(i)->setBackgroundColor(QColor(146, 182, 177));
+        }
+
+    }
+
+
+
+
+    }
+
+
+
+
+
+
+
+}
+
+

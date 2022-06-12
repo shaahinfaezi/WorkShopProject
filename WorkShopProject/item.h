@@ -29,6 +29,8 @@ private:
 
     int second;
 
+    bool done;
+
 public:
 
         item(){};
@@ -70,6 +72,12 @@ public:
         void set_minute(int);
 
         void set_second(int);
+
+        bool get_done();
+
+        void set_done(bool);
+
+
 };
 
 

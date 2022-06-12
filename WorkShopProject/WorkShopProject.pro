@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     addtask.cpp \
     calendar.cpp \
+    calendardialog.cpp \
     item.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 HEADERS += \
     addtask.h \
     calendar.h \
+    calendardialog.h \
     item.h \
     mainwindow.h \
     tasks.h
@@ -33,6 +35,7 @@ HEADERS += \
 FORMS += \
     addtask.ui \
     calendar.ui \
+    calendardialog.ui \
     mainwindow.ui \
     tasks.ui
 
@@ -40,3 +43,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

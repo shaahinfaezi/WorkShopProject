@@ -3,11 +3,13 @@
 #include "tasks.h"
 #include "ui_tasks.h"
 #include "item.h"
+#include "calendardialog.h"
 
 #include <string>
 #include <vector>
 #include <QString>
 #include <QMessageBox>
+#include <QtDebug>
 
 
 
@@ -34,6 +36,7 @@ AddTask::AddTask(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddTask)
 {
+    //vaghti add zade shode
     ui->setupUi(this);
     current_row=-2;
 }
@@ -44,6 +47,7 @@ AddTask::AddTask(QWidget *parent,int current_row) :
     current_row(current_row)
 
 {
+    //vaghti domke edit zade shode
     ui->setupUi(this);
 
     Tasks *tasks=Tasks::get_instance(this);
@@ -85,30 +89,57 @@ void AddTask::on_pushButton_clicked()
 {
 
 
-    string title=ui->lineEdit->text().toLocal8Bit().constData();
+        string title=ui->lineEdit->text().toLocal8Bit().constData();
 
-    string description=ui->textEdit->toPlainText().toLocal8Bit().constData();
+        string description=ui->textEdit->toPlainText().toLocal8Bit().constData();
 
-    //calandar
-
-    string priority=ui->comboBox->currentText().toLocal8Bit().constData();
+        string priority=ui->comboBox->currentText().toLocal8Bit().constData();
 
 
         Tasks *tasks=Tasks::get_instance(this);
 
 
-            if(!empty_string_check(title) && !empty_string_check(description)          && !empty_string_check(priority) && current_row==-2){
+            if(!empty_string_check(title) && !empty_string_check(description) && tasks->temp_DateTime!=nullptr && !empty_string_check(priority) && current_row==-2){
             //save kardane task (dokme add zade shode)
 
 
 
             int last_index=tasks->items.size();
 
-            tasks->items.push_back(new item(title,description,priority,11,6,2022,12,56,10));
+            tasks->items.push_back(new item(title,description,priority,tasks->temp_DateTime->date().day(),tasks->temp_DateTime->date().month(),tasks->temp_DateTime->date().year(),tasks->temp_DateTime->time().hour(),tasks->temp_DateTime->time().minute(),tasks->temp_DateTime->time().second()));
 
             //add kardane item be listWidget
 
-            tasks->ui->listWidget->addItem(QString::fromUtf8(title.c_str())+"                "+QString::number(tasks->items[last_index]->get_month())+"/"+QString::number(tasks->items[last_index]->get_day())+"/"+QString::number(tasks->items[last_index]->get_year()));
+            //matne list (text formatting)
+
+             int width=tasks->ui->listWidget->minimumWidth();
+
+             QFont myFont(tasks->ui->listWidget->font());
+
+             QString str(QString::fromUtf8(title.c_str()));
+
+             QFontMetrics fm(myFont);
+
+             int title_width=fm.horizontalAdvance(str);
+
+             QString timeString = QString("%1:%2:%3")
+               .arg(tasks->temp_DateTime->time().hour(), 2, 10, QChar('0'))
+               .arg(tasks->temp_DateTime->time().minute(), 2, 10, QChar('0'))
+               .arg(tasks->temp_DateTime->time().second(), 2, 10, QChar('0'));
+
+
+
+            QString text=QString::fromUtf8(tasks->items[last_index]->get_title().c_str())+QString(((2*width)/10)-title_width,' ')+QString::number(tasks->items[last_index]->get_month())+"/"+QString::number(tasks->items[last_index]->get_day())+"/"+QString::number(tasks->items[last_index]->get_year())+QString(width/15,' ')+timeString;
+
+
+
+            //item list(baraye icon az resource file estefade shode)
+
+            QListWidgetItem *lItem=new QListWidgetItem(QIcon(":/rec /Icons/211717_circle_icon.png"),text);
+
+
+
+            tasks->ui->listWidget->addItem(lItem);
 
 
             //bargashtan be safe tasks
@@ -121,7 +152,7 @@ void AddTask::on_pushButton_clicked()
 
 
 
-            else if(!empty_string_check(title) && !empty_string_check(description)          && !empty_string_check(priority) && current_row!=-2){
+            else if(!empty_string_check(title) && !empty_string_check(description)  && tasks->temp_DateTime!=nullptr && !empty_string_check(priority) && current_row!=-2){
                 //edit kardane task
 
 
@@ -133,26 +164,42 @@ void AddTask::on_pushButton_clicked()
 
                 tasks->items.at(current_row)->set_priority(priority);
 
-                tasks->items.at(current_row)->set_day(12);
+                tasks->items.at(current_row)->set_day(tasks->temp_DateTime->date().day());
 
-                tasks->items.at(current_row)->set_month(6);
+                tasks->items.at(current_row)->set_month(tasks->temp_DateTime->date().month());
 
-                tasks->items.at(current_row)->set_year(2022);
+                tasks->items.at(current_row)->set_year(tasks->temp_DateTime->date().year());
 
-                tasks->items.at(current_row)->set_hour(12);
+                tasks->items.at(current_row)->set_hour(tasks->temp_DateTime->time().hour());
 
-                tasks->items.at(current_row)->set_minute(56);
+                tasks->items.at(current_row)->set_minute(tasks->temp_DateTime->time().minute());
 
-                tasks->items.at(current_row)->set_second(10);
-
+                tasks->items.at(current_row)->set_second(tasks->temp_DateTime->time().second());
 
 
                 //edit kardane item too listWidget
 
 
-                tasks->ui->listWidget->currentItem()->setText(QString::fromUtf8(tasks->items[current_row]->get_title().c_str())+"                "+QString::number(tasks->items[current_row]->get_month())+"/"+QString::number(tasks->items[current_row]->get_day())+"/"+QString::number(tasks->items[current_row]->get_year()));
+                int width=tasks->ui->listWidget->minimumWidth();
+
+                QFont myFont(tasks->ui->listWidget->font());
+
+                QString str(QString::fromUtf8(title.c_str()));
+
+                QFontMetrics fm(myFont);
+
+                int title_width=fm.horizontalAdvance(str);
+
+                QString timeString = QString("%1:%2:%3")
+                  .arg(tasks->temp_DateTime->time().hour(), 2, 10, QChar('0'))
+                  .arg(tasks->temp_DateTime->time().minute(), 2, 10, QChar('0'))
+                  .arg(tasks->temp_DateTime->time().second(), 2, 10, QChar('0'));
 
 
+
+                QString text=QString::fromUtf8(tasks->items[current_row]->get_title().c_str())+QString(((2*width)/10)-title_width,' ')+QString::number(tasks->items[current_row]->get_month())+"/"+QString::number(tasks->items[current_row]->get_day())+"/"+QString::number(tasks->items[current_row]->get_year())+QString(width/15,' ')+timeString;
+
+                tasks->ui->listWidget->currentItem()->setText(text);
 
 
                  //bargashtan be safe tasks
@@ -162,10 +209,6 @@ void AddTask::on_pushButton_clicked()
 
 
         }
-
-
-
-
 
 
 
@@ -182,13 +225,33 @@ void AddTask::on_pushButton_clicked()
 
 
 
+}
+
+void AddTask::on_pushButton_3_clicked()
+{
+    if(current_row==-2){
+
+
+    calendarDialog *Calendar=new calendarDialog(this);
+
+    Calendar->setModal(true);
+
+    Calendar->exec();
+
+    }
+    else{
+
+        Tasks *tasks=Tasks::get_instance();
+
+        calendarDialog *Calendar=new calendarDialog(this,tasks->items.at(current_row)->get_day(),tasks->items.at(current_row)->get_month(),tasks->items.at(current_row)->get_year(),tasks->items.at(current_row)->get_hour(),tasks->items.at(current_row)->get_minute(),tasks->items.at(current_row)->get_second());
+
+        Calendar->setModal(true);
+
+        Calendar->exec();
 
 
 
-
-
-
-
+    }
 
 
 

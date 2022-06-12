@@ -33,11 +33,13 @@ int minute,
 
     this->year=year;
 
-   this->hour=hour;
+    this->hour=hour;
 
     this->minute=minute;
 
-   this->second=second;
+    this->second=second;
+
+    done=false;
 
 
 }
@@ -155,5 +157,17 @@ int item::get_hour() const{
  void item::set_second(int second){
 
      this->second=second;
+
+ }
+
+ bool item::get_done(){
+
+     return done;
+
+ }
+
+ void item::set_done(bool done){
+
+     this->done=done;
 
  }

@@ -2,12 +2,16 @@
 #define TASKS_H
 
 #include <QDialog>
-#include "addtask.h"
+#include <QTimer>
 #include <iostream>
+#include <QDateTime>
+#include <vector>
+
+
 
 #include "item.h"
+#include "addtask.h"
 
-#include <vector>
 
 using std::vector;
 
@@ -26,6 +30,8 @@ public:
 
    vector<item*> items; //liste item ha
 
+   QDateTime *temp_DateTime; //temporary datetime baraye inke motmaen shavim ke karbar task ra save mikonad
+
 
     Ui::Tasks *ui;
 
@@ -38,8 +44,14 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_4_clicked();
+
+    void Due();
+
 private:
 
+
+    QTimer *Timer;
 
 
     static Tasks* instance;
