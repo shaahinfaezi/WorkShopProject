@@ -7,10 +7,6 @@
 
 
 
-string months[12]={"January","February","March","April","May","June","July","August","September","October","November","December"};
-int number_of_days[12]={31,28,31,30,31,30,31,31,30,31,30,31};
-
-
 
 calendarDialog::calendarDialog(QWidget *parent,int day,int month,int year,int hour,int minute,int second) :
     QDialog(parent),
@@ -32,6 +28,12 @@ calendarDialog::calendarDialog(QWidget *parent,int day,int month,int year,int ho
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
+
+    ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+
+     ui->tableWidget->horizontalHeader()->setVisible(true);
+
+
     print();
 
     ui->spinBox->setMinimum(0);
@@ -45,8 +47,6 @@ calendarDialog::calendarDialog(QWidget *parent,int day,int month,int year,int ho
     ui->spinBox_3->setMinimum(0);
 
     ui->spinBox_3->setMaximum(59);
-
-    ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
 
      ui->spinBox->setValue(hour);
 
@@ -195,3 +195,6 @@ void calendarDialog::on_pushButton_3_clicked()
 
 
 }
+
+
+

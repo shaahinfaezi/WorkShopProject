@@ -1,5 +1,6 @@
 #include "tasks.h"
 #include "ui_tasks.h"
+#include "mainwindow.h"
 #include <QThread>
 #include <QDebug>
 #include <QDateTime>
@@ -27,6 +28,8 @@ Tasks::Tasks(QWidget *parent) :
      Timer=new QTimer(this);
 
     connect(Timer,SIGNAL(timeout()),this,SLOT(Due()));
+
+    ui->pushButton_5->setIcon(QIcon(":/rec /Icons/back.png"));
 
     Timer->start(1000);
 
@@ -151,23 +154,26 @@ void Tasks::Due(){
         if(current_time>due_time){
 
 
-
-            ui->listWidget->item(i)->setBackgroundColor(Qt::red);
+            ui->listWidget->item(i)->setBackground(Qt::red);
 
         }
         else if(due_time - current_time<seconds_inDay){
 
-            ui->listWidget->item(i)->setBackgroundColor(Qt::yellow);
+            ui->listWidget->item(i)->setBackground(Qt::yellow);
 
 
         }
+
         else{
-            ui->listWidget->item(i)->setBackgroundColor(QColor(146, 182, 177));
+            ui->listWidget->item(i)->setBackground(QColor(146, 182, 177));
         }
+
 
     }
 
-
+        else{
+            ui->listWidget->item(i)->setBackground(QColor(146, 182, 177));
+        }
 
 
     }
@@ -181,3 +187,15 @@ void Tasks::Due(){
 }
 
 
+
+void Tasks::on_pushButton_5_clicked()
+{
+
+    this->hide();
+
+    MainWindow *mainwindow=new MainWindow(this);
+
+    mainwindow->show();
+
+
+}

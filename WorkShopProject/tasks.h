@@ -48,6 +48,8 @@ private slots:
 
     void Due();
 
+    void on_pushButton_5_clicked();
+
 private:
 
 

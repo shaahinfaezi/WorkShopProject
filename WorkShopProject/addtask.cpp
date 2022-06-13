@@ -129,7 +129,7 @@ void AddTask::on_pushButton_clicked()
 
 
 
-            QString text=QString::fromUtf8(tasks->items[last_index]->get_title().c_str())+QString(((2*width)/10)-title_width,' ')+QString::number(tasks->items[last_index]->get_month())+"/"+QString::number(tasks->items[last_index]->get_day())+"/"+QString::number(tasks->items[last_index]->get_year())+QString(width/15,' ')+timeString;
+            QString text=QString::fromUtf8(tasks->items[last_index]->get_title().c_str())+QString(((2*width)/10)-title_width,' ')+QString::number(tasks->items[last_index]->get_month())+"/"+QString::number(tasks->items[last_index]->get_day())+"/"+QString::number(tasks->items[last_index]->get_year())+QString(width/20,' ')+timeString;
 
 
 
@@ -197,7 +197,7 @@ void AddTask::on_pushButton_clicked()
 
 
 
-                QString text=QString::fromUtf8(tasks->items[current_row]->get_title().c_str())+QString(((2*width)/10)-title_width,' ')+QString::number(tasks->items[current_row]->get_month())+"/"+QString::number(tasks->items[current_row]->get_day())+"/"+QString::number(tasks->items[current_row]->get_year())+QString(width/15,' ')+timeString;
+                QString text=QString::fromUtf8(tasks->items[current_row]->get_title().c_str())+QString(((2*width)/10)-title_width,' ')+QString::number(tasks->items[current_row]->get_month())+"/"+QString::number(tasks->items[current_row]->get_day())+"/"+QString::number(tasks->items[current_row]->get_year())+QString(width/20,' ')+timeString;
 
                 tasks->ui->listWidget->currentItem()->setText(text);
 

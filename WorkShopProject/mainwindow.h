@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "calendar.h"
-#include "tasks.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,8 +24,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    Calendar *calendar;
-    Tasks *tasks;
+
 
 
 

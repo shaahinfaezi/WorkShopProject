@@ -6,17 +6,75 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>842</width>
-    <height>841</height>
+    <width>1000</width>
+    <height>853</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1000</width>
+    <height>1000</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(69, 105, 144);</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2">
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
+   <property name="spacing">
+    <number>5</number>
+   </property>
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
+   <property name="topMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>10</number>
+   </property>
+   <item>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+background: none;
+border: none;
+background-repeat: none;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>50</width>
+       <height>50</height>
+      </size>
+     </property>
+    </widget>
+   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="sizeConstraint">
@@ -53,16 +111,16 @@
         <enum>QLayout::SetNoConstraint</enum>
        </property>
        <property name="leftMargin">
-        <number>50</number>
+        <number>110</number>
        </property>
        <property name="topMargin">
-        <number>70</number>
+        <number>100</number>
        </property>
        <property name="rightMargin">
         <number>30</number>
        </property>
        <property name="bottomMargin">
-        <number>70</number>
+        <number>100</number>
        </property>
        <item>
         <widget class="QPushButton" name="pushButton">

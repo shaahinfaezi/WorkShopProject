@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "calendar.h"
+#include "tasks.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,8 +23,9 @@ void MainWindow::on_pushButton_clicked()
 
     //az safe main be safe tasks miravad
 
-    hide();
-    tasks=Tasks::get_instance(this);
+    this->hide();
+
+    Tasks *tasks=Tasks::get_instance(this);
     tasks->show();
 }
 
@@ -30,8 +33,8 @@ void MainWindow::on_pushButton_2_clicked()
 {
     //az safe main be safe calendar miravad
 
-    hide();
-    calendar=new Calendar(this);
+    this->hide();
+      Calendar *calendar=new Calendar(this);
     calendar->show();
 
 
