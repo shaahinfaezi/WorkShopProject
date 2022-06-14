@@ -4,6 +4,7 @@
 #include "ui_tasks.h"
 #include "item.h"
 #include "calendardialog.h"
+#include "calendar.h"
 
 #include <string>
 #include <vector>
@@ -32,13 +33,50 @@ bool empty_string_check(string s){//check mikonad ke string ha khali nabashand
 
 }
 
+void AddTask::print(int row){
+
+    Tasks *tasks=Tasks::get_instance(this);
+
+    ui->lineEdit->setText(QString::fromUtf8(tasks->items[row]->get_title().c_str()));
+
+    ui->textEdit->setText(QString::fromUtf8(tasks->items[row]->get_description().c_str()));
+
+    ui->comboBox->setCurrentText(QString::fromUtf8(tasks->items[row]->get_priority().c_str()));
+
+     ui->label_5->setText("Task number "+QString::number(TaskArrayIndex+1));
+
+}
+
 AddTask::AddTask(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddTask)
 {
+
+
     //vaghti add zade shode
     ui->setupUi(this);
     current_row=-2;
+
+    ui->pushButton_4->hide();
+
+    ui->pushButton_5->hide();
+
+     ui->pushButton_6->hide();
+
+     ui->label_5->hide();
+
+     ui->label_5->setEnabled(false);
+
+
+     ui->pushButton_4->setEnabled(false);
+
+     ui->pushButton_5->setEnabled(false);
+
+     ui->pushButton_6->setEnabled(false);
+
+
+
+
 }
 
 AddTask::AddTask(QWidget *parent,int current_row) :
@@ -47,20 +85,85 @@ AddTask::AddTask(QWidget *parent,int current_row) :
     current_row(current_row)
 
 {
+
+
+
     //vaghti domke edit zade shode
     ui->setupUi(this);
 
-    Tasks *tasks=Tasks::get_instance(this);
+    print(current_row);
+
+    ui->pushButton_4->hide();
+
+    ui->pushButton_5->hide();
+
+     ui->pushButton_6->hide();
+
+     ui->label_5->hide();
+
+     ui->label_5->setEnabled(false);
+
+     ui->pushButton_4->setEnabled(false);
+
+     ui->pushButton_5->setEnabled(false);
+
+     ui->pushButton_6->setEnabled(false);
+
+}
+
+AddTask::AddTask(QWidget *parent,vector<int> TaskArray):QDialog(parent),
+    ui(new Ui::AddTask),TaskArray(TaskArray){
 
 
+    ui->setupUi(this);
 
-    ui->lineEdit->setText(QString::fromUtf8(tasks->items[current_row]->get_title().c_str()));
+    current_row=-3;
 
-    ui->textEdit->setText(QString::fromUtf8(tasks->items[current_row]->get_description().c_str()));
+    TaskArrayIndex=0;
 
-    //calendar
+    ui->pushButton->hide();
 
-    ui->comboBox->setCurrentText(QString::fromUtf8(tasks->items[current_row]->get_priority().c_str()));
+    ui->pushButton_2->hide();
+
+
+    ui->pushButton->setEnabled(false);
+
+    ui->pushButton_2->setEnabled(false);
+
+    ui->label_5->show();
+
+    ui->label_5->setEnabled(true);
+
+
+    ui->pushButton_4->setEnabled(true);
+
+    ui->pushButton_5->setEnabled(true);
+
+    ui->pushButton_6->setEnabled(true);
+
+    ui->pushButton_4->show();
+
+    ui->pushButton_5->show();
+
+     ui->pushButton_6->show();
+
+    ui->pushButton_4->setIconSize(*new QSize(70,70));
+    ui->pushButton_5->setIconSize(*new QSize(70,70));
+
+    ui->pushButton_4->setIcon(QIcon(":/rec /Icons/1814083_arrow_left_icon.png"));
+    ui->pushButton_5->setIcon(QIcon(":/rec /Icons/1814085_arrow_forward_next_right_icon.png"));
+
+
+    ui->pushButton_6->setIcon(QIcon(":/rec /Icons/back.png"));
+
+   print(TaskArray.at(TaskArrayIndex));
+
+    ui->lineEdit->setReadOnly(true);
+
+    ui->textEdit->setReadOnly(true);
+
+    ui->comboBox->setEnabled(false);
+
 
 }
 
@@ -73,9 +176,12 @@ void AddTask::on_pushButton_2_clicked()
 {
 
     //az safe ezafe kardane task be safe tasks barmigardad
+     Tasks *tasks=Tasks::get_instance(this);
+
+    tasks->temp_DateTime=nullptr;
 
     this->close();
-    Tasks *tasks=Tasks::get_instance(this);
+
 
     tasks->show();
 
@@ -141,6 +247,8 @@ void AddTask::on_pushButton_clicked()
 
             tasks->ui->listWidget->addItem(lItem);
 
+            tasks->temp_DateTime=nullptr;
+
 
             //bargashtan be safe tasks
             this->close();
@@ -202,6 +310,8 @@ void AddTask::on_pushButton_clicked()
                 tasks->ui->listWidget->currentItem()->setText(text);
 
 
+                 tasks->temp_DateTime=nullptr;
+
                  //bargashtan be safe tasks
                 this->close();
 
@@ -229,7 +339,7 @@ void AddTask::on_pushButton_clicked()
 
 void AddTask::on_pushButton_3_clicked()
 {
-    if(current_row==-2){
+    if(current_row==-2){//add
 
 
     calendarDialog *Calendar=new calendarDialog(this);
@@ -239,7 +349,7 @@ void AddTask::on_pushButton_3_clicked()
     Calendar->exec();
 
     }
-    else{
+    else if(current_row>=0){//edit
 
         Tasks *tasks=Tasks::get_instance();
 
@@ -253,6 +363,52 @@ void AddTask::on_pushButton_3_clicked()
 
     }
 
+    else if(current_row==-3){//calendar
+
+        Tasks *tasks=Tasks::get_instance();
+
+        calendarDialog *Calendar=new calendarDialog(this,tasks->items.at(TaskArray.at(TaskArrayIndex))->get_day(),tasks->items.at(TaskArray.at(TaskArrayIndex))->get_month(),tasks->items.at(TaskArray.at(TaskArrayIndex))->get_year(),tasks->items.at(TaskArray.at(TaskArrayIndex))->get_hour(),tasks->items.at(TaskArray.at(TaskArrayIndex))->get_minute(),tasks->items.at(TaskArray.at(TaskArrayIndex))->get_second(),true);
+
+        Calendar->setModal(true);
+
+        Calendar->exec();
 
 
+    }
+
+
+
+
+}
+
+void AddTask::on_pushButton_4_clicked()
+{
+    if(TaskArrayIndex>0){
+
+        TaskArrayIndex--;
+
+        print(TaskArray.at(TaskArrayIndex));
+
+
+    }
+}
+
+void AddTask::on_pushButton_5_clicked()
+{
+
+    if(TaskArrayIndex<TaskArray.size()-1){
+
+        TaskArrayIndex++;
+
+        print(TaskArray.at(TaskArrayIndex));
+
+
+    }
+}
+
+void AddTask::on_pushButton_6_clicked()
+{
+    this->hide();
+    Calendar *calendar=new Calendar(this);
+    calendar->show();
 }

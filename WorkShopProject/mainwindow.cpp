@@ -23,18 +23,23 @@ void MainWindow::on_pushButton_clicked()
 
     //az safe main be safe tasks miravad
 
-    this->hide();
+    this->close();
 
     Tasks *tasks=Tasks::get_instance(this);
+
     tasks->show();
+
+
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     //az safe main be safe calendar miravad
 
-    this->hide();
-      Calendar *calendar=new Calendar(this);
+    this->close();
+
+    Calendar *calendar=new Calendar(this);
+
     calendar->show();
 
 

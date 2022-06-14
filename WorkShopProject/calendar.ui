@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>732</width>
-    <height>736</height>
+    <width>707</width>
+    <height>714</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
-    <height>0</height>
+    <width>700</width>
+    <height>700</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>16777215</width>
-    <height>16777215</height>
+    <width>800</width>
+    <height>800</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -141,7 +141,7 @@ background-repeat: none;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 255, 255);</string>
+    <string notr="true">color:rgb(253, 255, 252);</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -272,7 +272,7 @@ background-repeat: none;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 255, 255);</string>
+    <string notr="true">color:rgb(253, 255, 252);</string>
    </property>
    <property name="text">
     <string>TextLabel</string>

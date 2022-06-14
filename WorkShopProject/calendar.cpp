@@ -2,6 +2,11 @@
 #include "ui_calendar.h"
 #include "mainwindow.h"
 #include "tasks.h"
+#include "vector"
+#include <QDateTime>
+#include <QMessageBox>
+
+using std::vector;
 
 
 
@@ -11,7 +16,6 @@ Calendar::Calendar(QWidget *parent) :
     ui(new Ui::Calendar)
 {
     ui->setupUi(this);
-
 
     ui->pushButton->setIcon(QIcon(":/rec /Icons/back.png"));
 
@@ -30,8 +34,6 @@ Calendar::Calendar(QWidget *parent) :
     CalendarDialog=new calendarDialog(this);
 
     ui->tableWidget->horizontalHeader()->setVisible(true);
-
-
 
     print();
 }
@@ -66,8 +68,6 @@ void Calendar::print(){
         QTableWidgetItem *table_item=new QTableWidgetItem(QString::number(i));
 
         ui->tableWidget->setItem(row,column,table_item);
-
-
 
         for(int j=0;j<int(tasks->items.size());j++){
 
@@ -154,7 +154,34 @@ void Calendar::on_tableWidget_cellDoubleClicked(int row, int column)
 {
 
 
+    Tasks *tasks=Tasks::get_instance(this);
+     vector<int> TaskArray;
+
+    for(int i=0;i<int(tasks->items.size());i++){
 
 
+        if(tasks->items.at(i)->get_day()==ui->tableWidget->item(row,column)->text().toInt() && tasks->items.at(i)->get_month()==CalendarDialog->month &&tasks->items.at(i)->get_year()==CalendarDialog->year){
+
+
+            TaskArray.push_back(i);
+
+
+        }
+    }
+
+    if(TaskArray.size()!=0){
+    this->hide();
+
+    AddTask *addTask=new AddTask(this,TaskArray);
+
+    addTask->show();
+
+}
+    else{
+
+    QMessageBox::information(this,"Info","There is no task for the day\nEnjoy!");
+
+
+    }
 
 }

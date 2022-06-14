@@ -3,21 +3,29 @@
 #include "tasks.h"
 #include <QMessageBox>
 #include "addtask.h"
+#include <QtDebug>
 
 
 
+int temp_month,temp_year;
 
-
-calendarDialog::calendarDialog(QWidget *parent,int day,int month,int year,int hour,int minute,int second) :
+calendarDialog::calendarDialog(QWidget *parent,int day,int month,int year,int hour,int minute,int second,bool From_Calendar) :
     QDialog(parent),
     ui(new Ui::calendarDialog),day(day),month(month),year(year)
 {
 
-    Tasks *tasks=Tasks::get_instance(this);
 
-    tasks->temp_DateTime=nullptr;
+    temp_month=month;
 
-    ui->setupUi(this);
+    temp_year=year;
+
+     ui->setupUi(this);
+
+     Tasks *tasks=Tasks::get_instance(this);
+
+     tasks->temp_DateTime=nullptr;
+
+    if(!From_Calendar){
 
     ui->pushButton->setIconSize(*new QSize(65,65));
     ui->pushButton_2->setIconSize(*new QSize(65,65));
@@ -54,6 +62,38 @@ calendarDialog::calendarDialog(QWidget *parent,int day,int month,int year,int ho
 
      ui->spinBox_3->setValue(second);
 
+    }
+    else{
+       print();
+
+       ui->spinBox->setValue(hour);
+
+       ui->spinBox_2->setValue(minute);
+
+       ui->spinBox_3->setValue(second);
+
+       ui->spinBox->setEnabled(false);
+
+       ui->spinBox_2->setEnabled(false);
+
+       ui->spinBox_3->setEnabled(false);
+
+       ui->pushButton->setEnabled(false);
+
+       ui->pushButton_2->setEnabled(false);
+
+       ui->pushButton_3->setEnabled(false);
+
+       ui->pushButton->hide();
+
+       ui->pushButton_2->hide();
+
+       ui->pushButton_3->hide();
+
+       ui->tableWidget->setEnabled(false);
+
+    }
+
 }
 
 
@@ -86,6 +126,12 @@ void calendarDialog::print(){
 
         ui->tableWidget->setItem(row,column,table_item);
 
+        if(day==i && month==temp_month && year==temp_year){
+
+            ui->tableWidget->selectionModel()->clearSelection();
+            ui->tableWidget->selectionModel()->select(ui->tableWidget->model()->index(row,column),QItemSelectionModel::Select);
+        }
+
         if(++column>6){
 
             column=0;
@@ -97,6 +143,8 @@ void calendarDialog::print(){
     ui->label->setText(QString::fromUtf8(months[month-1].c_str()));
 
     ui->label_2->setText(QString::number(year));
+
+
 
 }
 
@@ -161,9 +209,11 @@ void calendarDialog::on_pushButton_clicked()
 void calendarDialog::on_pushButton_3_clicked()
 {
 
+    Tasks *tasks=Tasks::get_instance(this);
+
     if(ui->tableWidget->selectedItems().size()!=0 && ui->tableWidget->selectedItems().at(0)->text()!=""){
 
-        Tasks *tasks=Tasks::get_instance(this);
+
 
         //date va time ra temp save mikonim ta dar addtask be items add konim
         QDateTime *temp_DT=new QDateTime();
@@ -191,6 +241,9 @@ void calendarDialog::on_pushButton_3_clicked()
               QMessageBox::warning(this,"Warning","Please select a date.");
 
     }
+
+
+
 
 
 

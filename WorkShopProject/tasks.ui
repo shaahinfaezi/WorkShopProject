@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>853</height>
+    <height>851</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -35,11 +35,17 @@
    <property name="sizeConstraint">
     <enum>QLayout::SetDefaultConstraint</enum>
    </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
    <property name="topMargin">
     <number>5</number>
    </property>
    <property name="rightMargin">
     <number>10</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
    </property>
    <item>
     <widget class="QPushButton" name="pushButton_5">
@@ -131,7 +137,8 @@ background-repeat: none;</string>
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color:rgb(126, 161, 114)</string>
+          <string notr="true">background-color:rgb(24, 54, 66);
+color:rgb(239, 247, 255);</string>
          </property>
          <property name="text">
           <string>Add </string>
@@ -147,7 +154,8 @@ background-repeat: none;</string>
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color:rgb(126, 161, 114)</string>
+          <string notr="true">background-color:rgb(24, 54, 66);
+color:rgb(239, 247, 255);</string>
          </property>
          <property name="text">
           <string>Edit</string>
@@ -163,7 +171,8 @@ background-repeat: none;</string>
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color:rgb(126, 161, 114)</string>
+          <string notr="true">background-color:rgb(24, 54, 66);
+color:rgb(239, 247, 255);</string>
          </property>
          <property name="text">
           <string>Delete</string>
@@ -179,7 +188,8 @@ background-repeat: none;</string>
           </sizepolicy>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color:rgb(126, 161, 114)</string>
+          <string notr="true">background-color:rgb(24, 54, 66);
+color:rgb(239, 247, 255);</string>
          </property>
          <property name="text">
           <string>Done</string>

@@ -2,6 +2,9 @@
 #define ADDTASK_H
 
 #include <QDialog>
+#include <vector>
+
+using std::vector;
 
 
 
@@ -16,6 +19,8 @@ class AddTask : public QDialog
 public:
     explicit AddTask(QWidget *parent = nullptr);
     explicit AddTask(QWidget *parent,int);
+    explicit AddTask(QWidget *parent,vector<int>);
+
 
     ~AddTask();
 
@@ -26,11 +31,22 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
 private:
     Ui::AddTask *ui;
 
     int current_row;
 
+    int TaskArrayIndex;
+
+    void print(int);
+
+    vector<int> TaskArray;
 
 };
 

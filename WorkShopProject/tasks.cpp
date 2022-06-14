@@ -20,16 +20,18 @@ Tasks::Tasks(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Tasks)
 {
+
     ui->setupUi(this);
 
 
      ui->listWidget->setIconSize(*new QSize(35,35));
 
+     ui->pushButton_5->setIcon(QIcon(":/rec /Icons/back.png"));
+
      Timer=new QTimer(this);
 
     connect(Timer,SIGNAL(timeout()),this,SLOT(Due()));
 
-    ui->pushButton_5->setIcon(QIcon(":/rec /Icons/back.png"));
 
     Timer->start(1000);
 

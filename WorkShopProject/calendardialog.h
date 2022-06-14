@@ -31,13 +31,13 @@ class calendarDialog : public QDialog
 public:
     explicit calendarDialog(QWidget *parent,
 
-    int day=1,
+    int day=QDateTime::currentDateTime().date().day(),
 
     int month=QDateTime::currentDateTime().date().month(),
 
     int year=QDateTime::currentDateTime().date().year(),
 
-    int hour=0,int minute=0,int second=0
+    int hour=0,int minute=0,int second=0,bool From_Calendar=false
  );
     ~calendarDialog();
 
