@@ -52,7 +52,7 @@ private slots:
 
 private:
 
-
+    //timer baraye check kardan zaman sar rasid task ha (zard va ghermez kardananeshan)
     QTimer *Timer;
 
 
@@ -62,7 +62,7 @@ private:
     explicit Tasks(QWidget *parent = nullptr);
 
 
-
+    //pointeri az addtask baraye raftan be window addTask
     AddTask *addtask;
 
 

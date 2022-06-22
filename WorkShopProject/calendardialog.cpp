@@ -1,9 +1,11 @@
 #include "calendardialog.h"
 #include "ui_calendardialog.h"
 #include "tasks.h"
-#include <QMessageBox>
 #include "addtask.h"
-#include <QtDebug>
+
+#include <QMessageBox>
+
+
 
 
 
@@ -14,12 +16,15 @@ calendarDialog::calendarDialog(QWidget *parent,int day,int month,int year,int ho
     ui(new Ui::calendarDialog),day(day),month(month),year(year)
 {
 
+    //az dakhel task vared shodim (add ya edit)
 
     temp_month=month;
 
     temp_year=year;
 
      ui->setupUi(this);
+
+     setWindowTitle("Calendar Dialog");
 
      Tasks *tasks=Tasks::get_instance(this);
 
@@ -64,6 +69,8 @@ calendarDialog::calendarDialog(QWidget *parent,int day,int month,int year,int ho
 
     }
     else{
+
+       //az dakhele calendar vared shodim va task haye oon rooz ro neshoon midim
        print();
 
        ui->spinBox->setValue(hour);
@@ -107,6 +114,7 @@ void calendarDialog::print(){
 
     ui->tableWidget->clearContents();
 
+    //check kardane sale kabise
     if((year%4==0 && year%100!=0) || year%400==0){
 
         number_of_days[1]=29;
@@ -117,7 +125,7 @@ void calendarDialog::print(){
 
     row=0;
 
-    column=day_of_month(1,month,year);
+    column=day_of_month(month,year);//rooze aval oon mah va sal
 
 
     for(int i=1;i<=number_of_days[month-1];i++){
@@ -148,10 +156,11 @@ void calendarDialog::print(){
 
 }
 
-int calendarDialog::day_of_month(int day,int month,int year){
+int calendarDialog::day_of_month(int month,int year){
 
+        int day=1;
 
-
+       //rooze aval sal ha dar halat koli
        static int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
 
        if (month < 3) {
@@ -164,6 +173,7 @@ int calendarDialog::day_of_month(int day,int month,int year){
 
        }
 
+       //formool baraye bedast avardane avali rooze sal ba tavajoh be inke sal kabise hast ya na
        return ( year + year/4 - year/100 + year/400 + t[month-1] + day) % 7;
 
 
@@ -174,6 +184,8 @@ int calendarDialog::day_of_month(int day,int month,int year){
 
 void calendarDialog::on_pushButton_2_clicked()
 {
+
+    //mahe ghabl
     month--;
 
     if(month<1){
@@ -194,7 +206,7 @@ void calendarDialog::on_pushButton_clicked()
     month++;
 
 
-
+    //mahe baad
     if(month>12){
 
         month=1;

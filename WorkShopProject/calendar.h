@@ -2,6 +2,7 @@
 #define CALENDAR_H
 
 #include <QDialog>
+
 #include "calendardialog.h"
 
 namespace Ui {
@@ -31,9 +32,11 @@ private slots:
 private:
     Ui::Calendar *ui;
 
+
+    //namayeshe calendar
     void print();
 
-
+    //pointeri az CalendarDialog ke betavan az member hash estefade kard
     calendarDialog *CalendarDialog;
 
 

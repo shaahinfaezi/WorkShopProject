@@ -1,3 +1,4 @@
+//in class baraye add kardan,edit kardan va neshoon dadane task haye yek rooz hengamike az calendar be in safhe miaim estefade mishavad
 #include "addtask.h"
 #include "ui_addtask.h"
 #include "tasks.h"
@@ -7,10 +8,8 @@
 #include "calendar.h"
 
 #include <string>
-#include <vector>
 #include <QString>
 #include <QMessageBox>
-#include <QtDebug>
 
 
 
@@ -21,8 +20,8 @@ using std::all_of;
 using std::string;
 
 
-
-bool empty_string_check(string s){//check mikonad ke string ha khali nabashand
+//tabe i baraye check kardan field ha
+bool empty_string_check(string s){
 
     if(all_of(s.begin(),s.end(),isspace)||s.empty()){
         return true;
@@ -32,6 +31,8 @@ bool empty_string_check(string s){//check mikonad ke string ha khali nabashand
     }
 
 }
+
+
 
 void AddTask::print(int row){
 
@@ -47,14 +48,16 @@ void AddTask::print(int row){
 
 }
 
+//constructor vaghti add zade shode
 AddTask::AddTask(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddTask)
 {
 
 
-    //vaghti add zade shode
+
     ui->setupUi(this);
+    setWindowTitle("Add");
     current_row=-2;
 
     ui->pushButton_4->hide();
@@ -79,6 +82,8 @@ AddTask::AddTask(QWidget *parent) :
 
 }
 
+
+//constructor vaghti domke edit zade shode
 AddTask::AddTask(QWidget *parent,int current_row) :
     QDialog(parent),
     ui(new Ui::AddTask),
@@ -88,9 +93,8 @@ AddTask::AddTask(QWidget *parent,int current_row) :
 
 
 
-    //vaghti domke edit zade shode
     ui->setupUi(this);
-
+    setWindowTitle("Edit");
     print(current_row);
 
     ui->pushButton_4->hide();
@@ -111,12 +115,14 @@ AddTask::AddTask(QWidget *parent,int current_row) :
 
 }
 
+
+//constructor vaghti az calendar be in safe miad
 AddTask::AddTask(QWidget *parent,vector<int> TaskArray):QDialog(parent),
     ui(new Ui::AddTask),TaskArray(TaskArray){
 
 
     ui->setupUi(this);
-
+    setWindowTitle("Tasks of the day");
     current_row=-3;
 
     TaskArrayIndex=0;
@@ -167,10 +173,17 @@ AddTask::AddTask(QWidget *parent,vector<int> TaskArray):QDialog(parent),
 
 }
 
+
 AddTask::~AddTask()
 {
     delete ui;
+
+
+
+
 }
+
+
 
 void AddTask::on_pushButton_2_clicked()
 {
@@ -251,9 +264,14 @@ void AddTask::on_pushButton_clicked()
 
 
             //bargashtan be safe tasks
+
+
             this->close();
 
+
             tasks->show();
+
+
         }
 
 
@@ -318,6 +336,8 @@ void AddTask::on_pushButton_clicked()
                 tasks->show();
 
 
+
+
         }
 
 
@@ -348,6 +368,11 @@ void AddTask::on_pushButton_3_clicked()
 
     Calendar->exec();
 
+
+
+
+
+
     }
     else if(current_row>=0){//edit
 
@@ -358,6 +383,7 @@ void AddTask::on_pushButton_3_clicked()
         Calendar->setModal(true);
 
         Calendar->exec();
+
 
 
 
@@ -374,6 +400,9 @@ void AddTask::on_pushButton_3_clicked()
         Calendar->exec();
 
 
+
+
+
     }
 
 
@@ -383,6 +412,8 @@ void AddTask::on_pushButton_3_clicked()
 
 void AddTask::on_pushButton_4_clicked()
 {
+
+    //raftan be task ghabli dar rooz
     if(TaskArrayIndex>0){
 
         TaskArrayIndex--;
@@ -396,6 +427,7 @@ void AddTask::on_pushButton_4_clicked()
 void AddTask::on_pushButton_5_clicked()
 {
 
+    //raftan be task baadi dar rooz
     if(TaskArrayIndex<TaskArray.size()-1){
 
         TaskArrayIndex++;
@@ -408,7 +440,10 @@ void AddTask::on_pushButton_5_clicked()
 
 void AddTask::on_pushButton_6_clicked()
 {
+    //bazgasht be calendar
     this->hide();
     Calendar *calendar=new Calendar(this);
     calendar->show();
+
+
 }

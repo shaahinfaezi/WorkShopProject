@@ -1,3 +1,5 @@
+//in class baraye add kardan,edit kardan va neshoon dadane task haye yek rooz hengamike az calendar be in safhe miaim estefade mishavad
+
 #ifndef ADDTASK_H
 #define ADDTASK_H
 
@@ -38,12 +40,16 @@ private slots:
     void on_pushButton_6_clicked();
 
 private:
+
     Ui::AddTask *ui;
 
+    //index itemi az list ke select shode
     int current_row;
 
-    int TaskArrayIndex;
+    //shomarende i baraye neshoon dadan list task haye sabt shode dar yek rooze khas (baraye vaghti az calendar be in safe miaim)
+    unsigned int TaskArrayIndex;
 
+    //tabe baraye por kardan field ha vaghti edit anjam mishavad ya az calendar be task oomadim(yek rooz select shode)
     void print(int);
 
     vector<int> TaskArray;

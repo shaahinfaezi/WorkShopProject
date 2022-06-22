@@ -1,6 +1,7 @@
 #include "tasks.h"
 #include "ui_tasks.h"
 #include "mainwindow.h"
+
 #include <QThread>
 #include <QDebug>
 #include <QDateTime>
@@ -23,11 +24,13 @@ Tasks::Tasks(QWidget *parent) :
 
     ui->setupUi(this);
 
+    setWindowTitle("Tasks");
 
      ui->listWidget->setIconSize(*new QSize(35,35));
 
      ui->pushButton_5->setIcon(QIcon(":/rec /Icons/back.png"));
 
+     //timer baraye check kardane tarikhe va zamane sar reside task ha
      Timer=new QTimer(this);
 
     connect(Timer,SIGNAL(timeout()),this,SLOT(Due()));
@@ -40,6 +43,8 @@ Tasks::Tasks(QWidget *parent) :
 Tasks::~Tasks()
 {
     delete ui;
+
+
 }
 
 void Tasks::on_pushButton_clicked()
@@ -110,7 +115,7 @@ if(ui->listWidget->count()>0 && ui->listWidget->currentItem()!=nullptr){
 
 void Tasks::on_pushButton_4_clicked()
 {
-    //done va undone mikonad task ro
+    //done va undone mikonad task ro (age done beshe task hata agar zaman sar reside an gozashte bashad range an digar ghermez nakhahad bood)
     if(ui->listWidget->count()>0 && ui->listWidget->currentItem()!=nullptr && !items.at(ui->listWidget->currentRow())->get_done()){
 
 
@@ -131,13 +136,15 @@ void Tasks::on_pushButton_4_clicked()
 }
 
 void Tasks::Due(){
+    //check kardane zamane sar reside task ha
+
 
     int current_time=QDateTime::currentDateTime().toTime_t();
 
     int seconds_inDay =24*60*60;
 
 
-    for(int i=0;i<items.size();i++)      {
+    for(int i=0;i<(int)items.size();i++)      {
 
         QDate D=*new QDate(items.at(i)->get_year(),items.at(i)->get_month(),items.at(i)->get_day());
 
@@ -193,6 +200,7 @@ void Tasks::Due(){
 void Tasks::on_pushButton_5_clicked()
 {
 
+    //bargashtan be safe aval
     this->hide();
 
     MainWindow *mainwindow=new MainWindow(this);

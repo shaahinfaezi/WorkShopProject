@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include "tasks.h"
 #include "vector"
+
 #include <QDateTime>
 #include <QMessageBox>
 
@@ -16,6 +17,7 @@ Calendar::Calendar(QWidget *parent) :
     ui(new Ui::Calendar)
 {
     ui->setupUi(this);
+    setWindowTitle("Calendar");
 
     ui->pushButton->setIcon(QIcon(":/rec /Icons/back.png"));
 
@@ -38,10 +40,13 @@ Calendar::Calendar(QWidget *parent) :
     print();
 }
 
+
 Calendar::~Calendar()
 {
     delete ui;
+    delete CalendarDialog;
 }
+
 
 void Calendar::print(){
 
@@ -50,6 +55,7 @@ void Calendar::print(){
 
     ui->tableWidget->clearContents();
 
+    //check kardane sal kabise
     if((CalendarDialog->year%4==0 && CalendarDialog->year%100!=0) || CalendarDialog->year%400==0){
 
         CalendarDialog->number_of_days[1]=29;
@@ -60,7 +66,8 @@ void Calendar::print(){
 
     row=0;
 
-    column=CalendarDialog->day_of_month(1,CalendarDialog->month,CalendarDialog->year);
+    column=CalendarDialog->day_of_month(CalendarDialog->month,CalendarDialog->year);//rooze aval oon mah va sal
+
 
 
     for(int i=1;i<=CalendarDialog->number_of_days[CalendarDialog->month-1];i++){
@@ -69,6 +76,7 @@ void Calendar::print(){
 
         ui->tableWidget->setItem(row,column,table_item);
 
+        //check kardane inke taski dar in rooz hast ya na
         for(int j=0;j<int(tasks->items.size());j++){
 
 
@@ -103,6 +111,7 @@ void Calendar::print(){
 
 void Calendar::on_pushButton_clicked()
 {
+    //bargashtan be safe aval
     this->hide();
 
     MainWindow *mainwindow=new MainWindow(this);
@@ -113,7 +122,7 @@ void Calendar::on_pushButton_clicked()
 void Calendar::on_pushButton_2_clicked()
 {
 
-
+    //mahe baad
 
     CalendarDialog->month++;
 
@@ -135,7 +144,7 @@ void Calendar::on_pushButton_3_clicked()
 {
 
 
-
+    //mahe ghabl
     CalendarDialog-> month--;
 
        if(CalendarDialog->month<1){
@@ -153,7 +162,7 @@ void Calendar::on_pushButton_3_clicked()
 void Calendar::on_tableWidget_cellDoubleClicked(int row, int column)
 {
 
-
+    //etelaate task haye sabt shode dar in rooz
     Tasks *tasks=Tasks::get_instance(this);
      vector<int> TaskArray;
 

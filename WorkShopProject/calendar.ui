@@ -44,7 +44,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(69, 105, 144);</string>
+   <string notr="true">background-color:rgb(79, 109, 122)</string>
   </property>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
@@ -169,7 +169,7 @@ background-repeat: none;</string>
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(79, 109, 122)</string>
+    <string notr="true">background-color:rgb(69, 105, 144);</string>
    </property>
    <property name="cornerButtonEnabled">
     <bool>true</bool>
