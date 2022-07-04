@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>707</width>
-    <height>714</height>
+    <width>744</width>
+    <height>756</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -127,9 +127,9 @@ background-repeat: none;</string>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>140</x>
      <y>30</y>
-     <width>101</width>
+     <width>161</width>
      <height>21</height>
     </rect>
    </property>
@@ -152,8 +152,8 @@ background-repeat: none;</string>
     <rect>
      <x>0</x>
      <y>90</y>
-     <width>707</width>
-     <height>625</height>
+     <width>711</width>
+     <height>641</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -258,7 +258,7 @@ background-repeat: none;</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>320</x>
      <y>30</y>
      <width>101</width>
      <height>21</height>
