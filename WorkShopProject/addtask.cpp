@@ -239,8 +239,6 @@ void AddTask::on_pushButton_clicked()
 
              QFontMetrics fm(myFont);
 
-             int title_width=fm.horizontalAdvance(str);
-
              QString timeString = QString("%1:%2:%3")
                .arg(tasks->temp_DateTime->time().hour(), 2, 10, QChar('0'))
                .arg(tasks->temp_DateTime->time().minute(), 2, 10, QChar('0'))
@@ -248,7 +246,7 @@ void AddTask::on_pushButton_clicked()
 
 
 
-            QString text=QString::fromUtf8(tasks->items[last_index]->get_title().c_str())+QString(((2*width)/10)-title_width,' ')+QString::number(tasks->items[last_index]->get_month())+"/"+QString::number(tasks->items[last_index]->get_day())+"/"+QString::number(tasks->items[last_index]->get_year())+QString(width/20,' ')+timeString;
+            QString text=QString::fromUtf8(tasks->items[last_index]->get_title().c_str())+QString(((2*width)/15),' ')+QString::number(tasks->items[last_index]->get_month())+"/"+QString::number(tasks->items[last_index]->get_day())+"/"+QString::number(tasks->items[last_index]->get_year())+QString(width/20,' ')+timeString;
 
 
 
@@ -314,7 +312,7 @@ void AddTask::on_pushButton_clicked()
 
                 QFontMetrics fm(myFont);
 
-                int title_width=fm.horizontalAdvance(str);
+
 
                 QString timeString = QString("%1:%2:%3")
                   .arg(tasks->temp_DateTime->time().hour(), 2, 10, QChar('0'))
@@ -323,7 +321,7 @@ void AddTask::on_pushButton_clicked()
 
 
 
-                QString text=QString::fromUtf8(tasks->items[current_row]->get_title().c_str())+QString(((2*width)/10)-title_width,' ')+QString::number(tasks->items[current_row]->get_month())+"/"+QString::number(tasks->items[current_row]->get_day())+"/"+QString::number(tasks->items[current_row]->get_year())+QString(width/20,' ')+timeString;
+                QString text=QString::fromUtf8(tasks->items[current_row]->get_title().c_str())+QString(((2*width)/15),' ')+QString::number(tasks->items[current_row]->get_month())+"/"+QString::number(tasks->items[current_row]->get_day())+"/"+QString::number(tasks->items[current_row]->get_year())+QString(width/20,' ')+timeString;
 
                 tasks->ui->listWidget->currentItem()->setText(text);
 
